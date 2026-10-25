@@ -1,0 +1,151 @@
+BrailleBridge — Wiring and Electrical Connections
+
+1. Overview
+
+BrailleBridge is a proposed refreshable Braille display that uses an Arduino Uno R3, PCA9685 servo driver boards and MG90S micro servos to generate tactile six-dot Braille patterns.
+
+This document describes the proposed electrical connections for the initial six-dot prototype.
+
+The initial implementation uses six servo channels on the first PCA9685 board. The second PCA9685 board is included in the proposed architecture to support future expansion.
+
+Status: Proposed wiring plan. All connections, voltage levels, current requirements and servo movements must be verified before operating the assembled hardware.
+
+2. Main Components
+
+* Arduino Uno R3
+* Two PCA9685 16-channel PWM servo driver boards
+* Six MG90S micro servos for the initial six-dot cell
+* Regulated 5 V power supply, with a proposed 10 A rating
+* Four momentary push buttons
+* Connecting wires and suitable connectors
+* Six Braille pins with the associated mechanical linkages
+
+3. Arduino Uno R3 to PCA9685 Connections
+
+The Arduino communicates with the PCA9685 boards using the I²C interface.
+
+Arduino Uno R3 Pin	PCA9685 Connection	Purpose
+A4	SDA	I²C data
+A5	SCL	I²C clock
+GND	GND	Common signal reference
+D8	OE on the first board, if exposed and supported by the selected module	Output-enable control
+
+The SDA and SCL connections are shared by both PCA9685 boards.
+
+The PCA9685 boards must have different I²C addresses so they can operate on the same I²C bus.
+
+Proposed I²C Addresses
+
+Board	Proposed Address	Intended Use
+PCA9685 Board 1	0x40	Six-dot initial prototype
+PCA9685 Board 2	0x41	Future expansion
+
+The address jumpers and solder pads must be configured according to the actual driver boards. Confirm both addresses before running the firmware.
+
+Important: The OE signal is active-low on the PCA9685. The exact OE wiring and startup behaviour must be checked against the selected module and firmware before use.
+
+4. Servo Connections
+
+The six servos in the initial prototype are intended to connect to channels 0–5 on PCA9685 Board 1.
+
+Braille Dot	PCA9685 Board	Channel
+Dot 1	Board 1	0
+Dot 2	Board 1	1
+Dot 3	Board 1	2
+Dot 4	Board 1	3
+Dot 5	Board 1	4
+Dot 6	Board 1	5
+
+Each servo connects to the corresponding channel’s signal, power and ground connections, following the connector layout printed on the actual PCA9685 board.
+
+The servo’s signal wire must connect to the channel signal output. Its power and ground wires must connect to the appropriate servo power and ground rails.
+
+Wire colours can vary by manufacturer. Confirm the signal, power and ground pins using the servo documentation rather than relying on colour alone.
+
+5. Power Supply Arrangement
+
+The proposed design uses a regulated 5 V power supply with a nominal 10 A rating.
+
+The servos can draw considerably more current during movement or when mechanically loaded than they draw at rest. Therefore, the servo power arrangement must be designed and verified before connecting all six servos.
+
+Power Design Principles
+
+* Provide a suitable power path for the servo supply.
+* Do not power the complete servo load through the Arduino Uno’s 5 V pin.
+* Connect the Arduino, PCA9685 signal circuitry and servo supply grounds appropriately so the control signals have a common reference.
+* Confirm the voltage and current ratings of the servos, driver boards, connectors and wiring.
+* Verify polarity before applying power.
+* Avoid short circuits and exposed conductors.
+* Do not connect the external supply to the Arduino’s power input without checking the board’s supported input range and the intended power arrangement.
+
+The proposed 5 V, 10 A supply rating must be checked against the selected components and expected simultaneous servo load. The final current requirement will be confirmed during testing.
+
+6. Push Button Connections
+
+Four buttons are planned for user control.
+
+Button	Proposed Arduino Pin	Intended Function
+Previous	D2	Move to the previous character
+Next	D3	Move to the next character
+Home	D4	Return to the beginning of the text
+Reset	D5	Reset the text navigation state
+
+The firmware and physical circuit must use the same pin assignments.
+
+If the firmware configures a button as INPUT_PULLUP, connect the button between the assigned input pin and GND. In this arrangement, a pressed button reads LOW.
+
+Button debouncing must be implemented or verified to prevent a single press from being interpreted as multiple presses.
+
+7. Text Input and Communication
+
+During the initial development stage, text input is planned through the Arduino’s USB serial connection.
+
+The firmware will process supported characters, map them to six-dot Braille patterns and update the servo outputs accordingly.
+
+The serial input implementation must be tested for:
+
+* Supported letters and spaces.
+* Uppercase and lowercase input handling.
+* Empty input and unsupported characters.
+* Text length limits.
+* Correct interaction with the navigation buttons.
+
+8. Electrical Safety and Initial Power-Up
+
+Before powering the prototype:
+
+1. Inspect all connections and confirm polarity.
+2. Verify the PCA9685 I²C addresses.
+3. Check that the servo power supply is regulated and set to the required voltage.
+4. Confirm that the Arduino and servo driver signal grounds share a suitable reference.
+5. Check that no servo is mechanically jammed.
+6. Begin testing with one servo before connecting the full six-servo assembly.
+7. Confirm safe servo movement and calibrate the endpoints before installing the pins.
+8. Monitor for excessive current, overheating, unexpected movement or unstable controller behaviour.
+
+Disconnect power before changing wiring or servicing the mechanical assembly.
+
+9. Initial Validation Checklist
+
+Test	Expected Result	Status
+I²C communication	Both configured driver boards can be detected at their intended addresses	Pending
+Single-servo test	One servo responds to control commands	Pending
+Six-channel test	Each of the six channels controls the intended servo	Pending
+Button test	Each button produces its assigned navigation action	Pending
+Braille pattern test	The intended dots rise and lower for selected characters	Pending
+Power stability test	The system operates without unacceptable voltage drop or resets	Pending
+Mechanical integration	Pins move freely without binding or excessive force	Pending
+
+Test statuses will be updated only after the corresponding tests have actually been performed.
+
+10. Future Expansion
+
+The longer-term design aims to support four six-dot cells, giving a total of 24 tactile dots.
+
+Expansion will require validation of the additional servo channels, power distribution, mechanical alignment, firmware mapping and refresh behaviour.
+
+The four-cell configuration is a stretch goal. The initial priority is to build and validate a reliable single six-dot cell before expanding the system.
+
+⸻
+
+BrailleBridge — A modular, repairable and low-cost refreshable Braille display.
