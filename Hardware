@@ -1,0 +1,96 @@
+BrailleBridge — Bill of Materials (BOM)
+
+1. Overview
+
+This document lists the proposed electronic and mechanical components required to develop BrailleBridge, a modular, repairable, low-cost refreshable Braille display.
+
+The initial prototype will focus on one six-dot Braille cell. The proposed architecture allows future expansion to four cells (24 dots), subject to successful validation of the initial prototype.
+
+Component prices and final quantities will be confirmed during procurement.
+
+2. Electronic Components
+
+No.	Component	Specification	Quantity for Initial Prototype	Purpose
+1	Arduino Uno R3	ATmega328P-based development board	1	Processes text input and controls the system
+2	PCA9685 servo driver	16-channel PWM driver board	2	Generates control signals for the micro servos
+3	MG90S micro servo	Position-controlled micro servo	6	Actuates the six Braille dots
+4	Regulated DC power supply	5 V, 10 A proposed rating	1	Supplies power to the servo system
+5	Push buttons	Momentary switches	4	Previous, Next, Home and Reset inputs
+6	Breadboard or prototyping board	Suitable for the selected wiring arrangement	1	Supports initial circuit assembly
+7	Jumper wires and connectors	Compatible with the controller and driver boards	As required	Connects the electronic components
+8	USB cable	Compatible with Arduino Uno R3	1	Firmware upload and serial communication
+
+Note: The quantities above describe the proposed initial six-dot prototype. Two PCA9685 boards are included to match the proposed architecture, although the initial cell is intended to use six servo channels on the first board.
+
+3. Mechanical Components
+
+No.	Component	Proposed Design	Quantity for Initial Prototype	Purpose
+1	Braille pins	Six tactile pin elements	6	Form the raised and lowered Braille dots
+2	Pin guide	Custom-designed 3D-printed guide	1	Maintains pin alignment and guides vertical movement
+3	Servo mounting structure	Custom bracket or mounting frame	As required	Holds the servos in their intended positions
+4	Mechanical linkages or pushrods	Designed to connect servo motion to the pins	6, subject to final design	Transfers actuator movement to the Braille pins
+5	Base and enclosure	Custom mechanical structure	1 set	Supports and protects the assembly
+6	Fasteners	Suitable screws, nuts and spacers	As required	Enables assembly and maintenance
+
+The final dimensions, materials, tolerances and linkage geometry will be determined during mechanical design and prototype testing.
+
+4. Proposed Expansion to Four Cells
+
+The longer-term target is a four-cell display containing 24 Braille dots.
+
+Component	Proposed Quantity for Four Cells
+Arduino Uno R3	1, subject to controller-capacity validation
+PCA9685 servo driver boards	2
+MG90S micro servos	24, plus 6 spare servos as proposed in the project plan
+Braille pins	24
+Pin guides	4 cell assemblies, subject to final mechanical design
+Power supply	To be validated against the final system’s measured current requirements
+Supporting mechanical parts	To be determined from the final CAD assembly
+
+The four-cell configuration is a stretch goal and will be considered only after the six-dot prototype has been validated.
+
+5. Electrical and Integration Considerations
+
+* The Arduino Uno R3 will communicate with the PCA9685 boards over I²C.
+* The proposed PCA9685 I²C addresses are 0x40 and 0x41.
+* The Arduino Uno R3 uses A4 for SDA and A5 for SCL.
+* The initial six-dot cell is intended to use channels 0–5 on the first PCA9685 board.
+* Servo power requirements must be considered separately from the Arduino’s logic-power requirements.
+* The power supply rating, wiring, connectors and grounding arrangement must be checked against the actual components before operation.
+* Servo positions and mechanical travel limits must be calibrated to avoid pin jamming or excessive force.
+* Output-enable control and the startup sequence will be validated during integration.
+
+6. Cost Estimation
+
+The total prototype cost will be calculated after component selection and price verification.
+
+Cost Category	Estimated Cost
+Arduino Uno R3	To be confirmed
+PCA9685 servo driver boards	To be confirmed
+Six MG90S micro servos	To be confirmed
+Power supply and electrical accessories	To be confirmed
+Braille pins and mechanical linkages	To be confirmed
+3D printing and mounting components	To be confirmed
+Push buttons, wires and connectors	To be confirmed
+Total estimated prototype cost	Pending price verification
+
+Prices will be recorded in INR using actual supplier listings or purchase receipts. The final cost will distinguish reusable development equipment from parts required for the prototype itself.
+
+7. Procurement and Validation Status
+
+This BOM represents the proposed component plan. It does not indicate that the components have already been purchased or tested.
+
+Before assembly, the selected components will be checked for compatibility, electrical ratings, mechanical fit and availability.
+
+Quantities, specifications and costs will be updated if the final design changes during development.
+
+8. Future Improvements
+
+Potential improvements include:
+
+* Replaceable Braille-cell modules.
+* Easier access to individual servos and pins for repair.
+* A compact and robust enclosure.
+* Improved mechanical alignment and reduced friction.
+* Expansion from one cell to four cells after successful validation.
+* Cost optimisation based on prototype results.
