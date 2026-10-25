@@ -1,0 +1,293 @@
+BrailleBridge — Testing Plan
+
+1. Purpose
+
+This document defines the proposed testing procedure for BrailleBridge, a modular refreshable Braille display designed to convert digital text into tactile Braille patterns.
+
+The initial prototype focuses on one six-dot Braille cell. Testing will evaluate the electronic control system, individual pin movement, pattern accuracy, repeatability, usability and repairability.
+
+Current status: Testing plan prepared. Physical prototype testing and performance measurements are pending.
+
+2. Testing Objectives
+
+The objectives are to:
+
+* Verify that supported characters are mapped to the correct six-dot Braille patterns.
+* Confirm that each of the six pins can be controlled independently.
+* Check that pins reach their intended raised and lowered positions.
+* Evaluate the consistency of repeated movements.
+* Measure the time required to update a Braille pattern.
+* Identify mechanical interference, excessive friction and actuator limitations.
+* Assess whether components can be inspected and replaced.
+* Document prototype cost and identify opportunities for improvement.
+
+3. Test Environment
+
+The proposed initial test setup includes:
+
+* Arduino Uno R3.
+* PCA9685 servo driver.
+* Six MG90S micro servos.
+* Six-dot Braille pin mechanism.
+* Proposed external 5 V power supply.
+* Computer with a serial monitor.
+* Measuring tools suitable for checking pin movement and dimensions.
+* Camera or smartphone for recording observations.
+
+The actual test setup and component specifications must be confirmed before testing begins.
+
+4. Functional Tests
+
+Test 1: Controller and Servo Driver Communication
+
+Objective: Verify communication between the Arduino and the PCA9685 servo driver.
+
+Procedure:
+
+1. Inspect the wiring before powering the circuit.
+2. Confirm the SDA and SCL connections.
+3. Check the configured I2C address.
+4. Run an appropriate communication test.
+5. Record whether the controller communicates successfully with the driver.
+
+Measurements: Communication success or failure, detected I2C address and any error messages.
+
+Status: Pending.
+
+Test 2: Individual Pin Actuation
+
+Objective: Verify independent movement of all six Braille pins.
+
+Procedure:
+
+1. Test the actuator associated with the first pin.
+2. Observe whether the intended pin moves.
+3. Repeat for the remaining five pins.
+4. Check for unwanted movement of neighbouring pins.
+5. Record any binding, slipping or abnormal noise.
+
+Measurements: Number of pins operating correctly out of six, movement consistency and observed interference.
+
+Status: Pending.
+
+Test 3: Raised and Lowered Pin States
+
+Objective: Determine whether each pin can reliably reach its intended raised and lowered positions.
+
+Procedure:
+
+1. Command a pin to its proposed raised position.
+2. Measure or observe the resulting position.
+3. Command it to its lowered position.
+4. Repeat the procedure for all six pins.
+5. Record the measured travel and any failures.
+
+Measurements: Pin travel, consistency between states and any mechanical obstruction.
+
+Status: Pending.
+
+Test 4: Braille Pattern Accuracy
+
+Objective: Check whether the software commands the correct pin combination for each supported character.
+
+Procedure:
+
+1. Select a test character.
+2. Determine its expected six-dot pattern using the project’s chosen Braille mapping reference.
+3. Enter the character through the supported input method.
+4. Record the commanded pin states.
+5. Compare the commands with the expected pattern.
+6. Repeat with additional supported characters.
+
+Measurements: Number of correct patterns divided by the total number of patterns tested.
+
+Calculation:
+
+Pattern accuracy (%) = (Correct patterns / Total patterns tested) × 100
+
+Software mapping accuracy and physical actuation accuracy should be recorded separately.
+
+Status: Pending.
+
+Test 5: Repeated Operation
+
+Objective: Evaluate whether the mechanism produces consistent pin states over repeated refresh cycles.
+
+Procedure:
+
+1. Select a repeatable sequence of test patterns.
+2. Run the sequence multiple times.
+3. Observe every pin during the sequence.
+4. Record missed movements, inconsistent positions, jamming or unusual noise.
+5. Inspect the mechanism for visible wear.
+
+Measurements: Number of successful cycles, number of observed failures and any change in pin movement.
+
+The number of cycles will be decided before the test and recorded in the results.
+
+Status: Pending.
+
+Test 6: Refresh Time
+
+Objective: Measure the time required to update the display from one pattern to another.
+
+Procedure:
+
+1. Choose a starting pattern and a different target pattern.
+2. Record the start of the update command.
+3. Measure the time until all pins reach their intended states.
+4. Repeat with different patterns.
+5. Calculate the average measured refresh time.
+
+Measurements: Individual refresh times, average refresh time and any incomplete updates.
+
+The timing method and test conditions must be documented so that results can be reproduced.
+
+Status: Pending.
+
+Test 7: Navigation and Input
+
+Objective: Verify the supported text-input and navigation functions.
+
+Procedure:
+
+1. Enter a short test string using the implemented input method.
+2. Check whether supported characters are processed correctly.
+3. Test the Previous and Next functions if implemented.
+4. Test Home and Reset if implemented.
+5. Record incorrect output, missed commands or unexpected behaviour.
+
+Measurements: Successful operations, failed operations and observed software errors.
+
+Only functions implemented in the actual firmware should be tested.
+
+Status: Pending.
+
+Test 8: Power and Electrical Behaviour
+
+Objective: Evaluate the electrical system under the intended operating conditions.
+
+Procedure:
+
+1. Verify supply voltage and polarity before connecting the circuit.
+2. Check that the power supply and wiring are suitable for the connected servos.
+3. Operate the mechanism using representative test patterns.
+4. Monitor supply voltage and current where suitable instruments are available.
+5. Record resets, unstable movement, excessive heating or other abnormal behaviour.
+
+Measurements: Supply voltage, current under recorded test conditions and observed electrical issues.
+
+The servo power supply must be designed for the expected combined load. A proposed power-supply rating is not proof that the completed system is electrically safe.
+
+Status: Pending.
+
+Test 9: Maintenance and Repairability
+
+Objective: Evaluate how easily an individual component can be inspected and replaced.
+
+Procedure:
+
+1. Identify a component selected for maintenance.
+2. Record the tools and steps required to access it.
+3. Remove and reinstall or replace the component where practical.
+4. Check whether the assembly can be restored without damaging other parts.
+5. Document the time required and any difficulties.
+
+Measurements: Maintenance time, tools required, components disturbed and any damage observed.
+
+Status: Pending.
+
+5. Initial Success Criteria
+
+The following are proposed targets or evaluation goals, not achieved results.
+
+Parameter	Proposed Evaluation
+Braille mapping	Target at least 99% correct software pattern generation during controlled testing
+Independent actuation	All six pins should respond to their intended commands
+Pin movement	Raised and lowered states should be distinguishable and repeatable
+Refresh time	Measure and report actual results; establish a target after initial trials
+Repeatability	Record successful cycles and all observed failures
+Repairability	Demonstrate component access and document replacement steps
+Prototype cost	Record actual component and manufacturing costs
+Reliability	Identify failure modes and document corrective actions
+
+Software pattern-generation accuracy does not establish physical display accuracy. The two must be measured independently.
+
+6. Results Record
+
+After each test, record the following information:
+
+Field	Details
+Test ID	Unique test number
+Test date	Date performed
+Hardware configuration	Components and versions used
+Procedure	Steps followed
+Expected result	Intended behaviour
+Actual result	Observed behaviour
+Measurements	Numerical readings where available
+Pass/Fail	Based on the predefined criterion
+Evidence	Photograph, video, log or measurement record
+Issues	Errors or unexpected behaviour
+Corrective action	Changes planned or completed
+
+No test should be marked as passed without recorded evidence supporting the result.
+
+7. Evidence to Include in the Repository
+
+The following evidence will be added as it becomes available:
+
+* Photographs of the assembled prototype.
+* Videos showing individual pin movement.
+* Photographs or screenshots of the wiring.
+* Serial monitor logs.
+* Braille pattern test results.
+* Pin-travel and refresh-time measurements.
+* Repeated-operation results.
+* CAD drawings and mechanical revisions.
+* Component cost records.
+* A record of problems identified and improvements made.
+
+Personal information should not be included in publicly shared test evidence.
+
+8. Risk Identification
+
+Potential issues to investigate include:
+
+* Pins sticking because of friction or misalignment.
+* Servo torque or travel being insufficient for the mechanism.
+* Linkages interfering with neighbouring components.
+* Inconsistent pin heights.
+* Excessive current draw when multiple servos move.
+* Controller resets caused by power instability.
+* Mechanical wear during repeated operation.
+* Incorrect character-to-pattern mapping.
+
+These are potential risks to investigate, not confirmed failures.
+
+9. Future Testing
+
+After the single-cell mechanism has been validated, testing can be extended to a four-cell, 24-pin configuration.
+
+Future testing may evaluate:
+
+* Coordination between multiple cells.
+* Longer text sequences.
+* More extensive repeated-operation testing.
+* Overall system dimensions and weight.
+* Power consumption during representative operation.
+* Assembly time and maintenance effort.
+* Usability feedback from people familiar with Braille.
+
+The expanded configuration remains a stretch goal until the initial cell is demonstrated.
+
+10. Conclusion
+
+This plan establishes a structured method for evaluating BrailleBridge’s software, electronics and mechanical design.
+
+Testing will begin with basic communication and individual pin movement, followed by pattern accuracy, repeated operation, refresh-time measurement and maintenance evaluation.
+
+Results will be recorded transparently, with proposed targets clearly distinguished from measured performance. The test plan will be updated as the design develops and new evidence becomes available.
+
+Project: BrailleBridge — Modular Refreshable Braille Display
+Development stage: Design and development
+Testing status: Pending physical validation
