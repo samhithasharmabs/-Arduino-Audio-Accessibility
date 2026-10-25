@@ -1,0 +1,219 @@
+BrailleBridge — Mechanical Design Notes
+
+1. Overview
+
+BrailleBridge is a proposed modular, repairable and low-cost refreshable Braille display. Its mechanical system is designed to convert electronic control signals into tactile Braille patterns using movable pins.
+
+The initial prototype focuses on a single six-dot Braille cell. Each dot must be independently controllable so that different combinations of raised and lowered pins can represent supported Braille characters.
+
+The mechanical design will prioritise reliable pin movement, correct dot alignment, ease of assembly, maintainability and future expansion.
+
+Development status: Mechanical concept and design planning. Final dimensions, linkage geometry, materials and operating performance require CAD development and physical validation.
+
+2. Six-Dot Braille Cell Layout
+
+A standard six-dot Braille cell consists of two columns and three rows.
+
+The dot numbering is arranged as follows:
+
+Left column    Right column
+    1              4
+    2              5
+    3              6
+
+Each dot has two intended states:
+
+* Raised: The dot is presented as part of the tactile character.
+* Lowered: The dot remains below the raised-dot level.
+
+Different combinations of these six dots represent different Braille characters.
+
+The six-dot layout will guide the design of the pin guide, actuator arrangement and control mapping.
+
+3. Proposed Mechanical Architecture
+
+The proposed mechanical assembly consists of the following elements:
+
+3.1 Braille Pins
+
+Six tactile pins form the output surface of the initial prototype.
+
+The pins must:
+
+* Move vertically with minimal friction.
+* Remain aligned with the standard six-dot layout.
+* Provide consistent raised and lowered positions.
+* Resist unwanted movement during tactile reading.
+* Be removable for inspection or replacement.
+
+Pin dimensions, tip geometry, spacing and travel will be determined during CAD development and user-oriented testing.
+
+3.2 Pin Guide
+
+A custom pin guide is proposed to maintain the alignment of all six pins.
+
+The guide is intended to:
+
+* Constrain unwanted sideways movement.
+* Maintain consistent spacing between pins.
+* Reduce friction and binding.
+* Support repeatable pin travel.
+* Allow access for maintenance.
+
+A 3D-printed PETG component is a candidate for the pin guide. Its suitability will be evaluated through dimensional checks, wear testing and repeated operation.
+
+3.3 Servo Actuation
+
+The proposed electronic architecture uses six MG90S micro servos for the initial cell.
+
+Each servo is intended to actuate one Braille dot through a mechanical linkage or pushrod.
+
+The mechanical design must translate servo rotation into controlled pin movement.
+
+The final linkage geometry must be developed to ensure:
+
+* Sufficient pin travel.
+* Reliable movement between the raised and lowered states.
+* Minimal unwanted movement of neighbouring pins.
+* No excessive force on the pins or servo gears.
+* Adequate clearance throughout the operating range.
+
+Independent control of all six dots must be demonstrated before the mechanism can be considered functional.
+
+3.4 Servo Mounting Structure
+
+A mounting frame will position the servos relative to the pin guide.
+
+The frame must provide:
+
+* Stable servo mounting.
+* Repeatable actuator alignment.
+* Clearance for linkages and moving components.
+* Access for servicing or replacing individual servos.
+* A compact arrangement suitable for a modular cell.
+
+The mounting design will be refined after the linkage and pin geometry are established.
+
+4. Mechanical Motion Concept
+
+The intended motion sequence is:
+
+1. The firmware identifies the required six-dot Braille pattern.
+2. The controller sends position commands to the servo driver.
+3. The selected servos move their respective linkages.
+4. The linkages raise the required pins and lower the remaining pins.
+5. The resulting pin arrangement represents the requested character.
+6. The system updates the pins when the user navigates to another character.
+
+The final design must ensure that the mechanism can transition between different patterns without pin collisions, jamming or unintended movement.
+
+This motion sequence describes the intended operation. Actual movement and repeatability must be verified during prototype testing.
+
+5. Proposed Materials and Manufacturing
+
+Component	Proposed Approach	Design Considerations
+Pin guide	3D-printed PETG candidate	Dimensional accuracy, friction and wear
+Braille pins	Material to be finalised	Surface finish, durability and tactile comfort
+Servo mounting frame	Custom-designed printed or fabricated part	Rigidity and alignment
+Linkages or pushrods	Geometry and material to be finalised	Strength, clearance and low friction
+Base and enclosure	Custom mechanical design	Protection, assembly and accessibility
+Fasteners	Suitable screws, nuts and spacers	Secure assembly and easy maintenance
+
+Material and manufacturing choices will be confirmed after the first CAD design and physical trials.
+
+6. Modularity and Repairability
+
+Repairability is a central design objective of BrailleBridge.
+
+The mechanical assembly will be developed with the following principles:
+
+* Replaceable components: Individual pins, servos and linkages should be accessible for inspection and replacement.
+* Accessible fasteners: The assembly should be removable without destroying the main structure.
+* Modular cell design: The six-dot cell should be treated as a functional module that may support future expansion.
+* Simple maintenance: Common failure points should be accessible without dismantling the complete system.
+* Documented assembly: Drawings and assembly instructions should support consistent rebuilding.
+
+These features will be evaluated through assembly and maintenance trials once the prototype exists.
+
+7. Mechanical Design Constraints
+
+The following constraints must be considered during CAD development:
+
+Pin Alignment
+
+The six pins must maintain their intended two-column, three-row arrangement.
+
+Pin Travel
+
+The mechanism must provide sufficient separation between raised and lowered states for tactile distinction.
+
+Friction and Binding
+
+Clearances and guide geometry must allow repeated movement without excessive friction.
+
+Actuator Limits
+
+Servo positions must remain within safe mechanical limits and must not force the linkage against a hard stop.
+
+Structural Stability
+
+The guide and mounting frame must remain sufficiently rigid during operation and tactile interaction.
+
+Packaging
+
+The servos, linkages, wiring and pin guide must fit into a compact assembly without interference.
+
+Repair Access
+
+The design must allow inspection and replacement of components that may wear or fail.
+
+Final values for dimensions, travel, clearances and operating limits will be determined through CAD and physical testing rather than assumed in advance.
+
+8. Proposed CAD Deliverables
+
+The mechanical design documentation will aim to include:
+
+1. Overall assembly model of the six-dot cell.
+2. Dimensioned drawing of the pin guide.
+3. Six-dot layout drawing.
+4. Servo mounting and linkage design.
+5. Exploded assembly view.
+6. Individual component drawings.
+7. Bill of materials for mechanical components.
+8. Photographs of the manufactured prototype.
+9. Design revisions made after testing.
+
+CAD models and drawings will be added to this repository when they are available.
+
+9. Mechanical Validation Plan
+
+Test	Purpose	Status
+Pin alignment check	Confirm the intended six-dot arrangement	Pending
+Individual pin movement	Verify that each pin can move independently	Pending
+Raised/lowered position check	Confirm distinguishable pin states	Pending
+Linkage clearance check	Identify interference or collisions	Pending
+Repeated movement test	Assess consistency and wear	Pending
+Tactile inspection	Evaluate whether the resulting patterns can be distinguished by touch	Pending
+Component replacement trial	Assess practical repairability	Pending
+
+Results will be recorded after the tests have been conducted. Photographs, measurements and observed problems will be included where possible.
+
+10. Future Mechanical Expansion
+
+After validating the initial six-dot cell, the design may be expanded to four cells, producing a total of 24 tactile dots.
+
+Expansion will require additional mechanical modules, coordinated actuator control, suitable packaging and validation of the complete display.
+
+The four-cell configuration remains a stretch goal. The first priority is a mechanically reliable and independently controllable six-dot cell.
+
+11. Current Status
+
+The mechanical architecture and design priorities have been documented. The final pin guide, servo linkages, dimensions, CAD assembly and manufacturing process still need to be developed and validated.
+
+The next steps are to create the CAD model, confirm that the selected servos can produce the required pin movement, manufacture the initial components and evaluate the assembled mechanism.
+
+No mechanical performance claims are considered verified until supported by physical testing.
+
+⸻
+
+BrailleBridge — Turning digital text into tactile information through modular mechanical design.
